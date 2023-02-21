@@ -22,6 +22,8 @@ function ToastPlayground() {
 				<h1>Toast Playground</h1>
 			</header>
 
+			{showToast && <Toast message={message} variant={variant} />}
+
 			<div className={styles.controlsWrapper}>
 				<form onSubmit={handleSubmit}>
 					<div className={styles.row}>
@@ -74,7 +76,6 @@ function ToastPlayground() {
 					</div>
 				</form>
 			</div>
-			{showToast && <Toast message={message} variant={variant} />}
 		</div>
 	);
 }
