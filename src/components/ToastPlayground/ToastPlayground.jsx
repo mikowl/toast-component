@@ -7,8 +7,14 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
 	const [message, setMessage] = useState("");
-	const [variant, setVariant] = useState("notice");
+	const [variant, setVariant] = useState(null);
+	const [showToast, setShowToast] = useState(false);
 
+	function handleSubmit(event) {
+		console.log("Toast popped!", message, variant);
+		event.preventDefault();
+		setShowToast(true);
+	}
 	return (
 		<div className={styles.wrapper}>
 			<header>
@@ -17,7 +23,7 @@ function ToastPlayground() {
 			</header>
 
 			<div className={styles.controlsWrapper}>
-				<form>
+				<form onSubmit={handleSubmit}>
 					<div className={styles.row}>
 						<label
 							htmlFor="message"
@@ -68,7 +74,7 @@ function ToastPlayground() {
 					</div>
 				</form>
 			</div>
-			<Toast message={message} variant={variant} />
+			{showToast && <Toast message={message} variant={variant} />}
 		</div>
 	);
 }
