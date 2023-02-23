@@ -1,15 +1,15 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/react': ^18.0.27
-  '@types/react-dom': ^18.0.10
+  '@types/react': ^18.0.28
+  '@types/react-dom': ^18.0.11
   '@vitejs/plugin-react': ^3.1.0
   new-component: ^5.0.2
   prettier: ^2.8.4
   react: ^18.2.0
   react-dom: ^18.2.0
   react-feather: ^2.0.10
-  vite: ^4.1.0
+  vite: ^4.1.4
 
 dependencies:
   new-component: 5.0.2
@@ -548,7 +548,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001457
-      electron-to-chromium: 1.4.305
+      electron-to-chromium: 1.4.307
       node-releases: 2.0.10
       update-browserslist-db: 1.0.10_browserslist@4.21.5
     dev: true
@@ -620,8 +620,8 @@ packages:
       ms: 2.1.2
     dev: true
 
-  /electron-to-chromium/1.4.305:
-    resolution: {integrity: sha512-WETy6tG0CT5gm1O+xCbyapWNsCcmIvrn4NHViIGYo2AT8FV2qUCXdaB+WqYxSv/vS5mFqhBYnfZAAkVArjBmUg==}
+  /electron-to-chromium/1.4.307:
+    resolution: {integrity: sha512-n54V0t4LyHM2oQiAOmD3qC2peB+orUktXORSnWxqtv3uEMSoUcsq+hoMpU08VEJCNbfgBtzy169P0TcrLuq53A==}
     dev: true
 
   /esbuild/0.16.17:
