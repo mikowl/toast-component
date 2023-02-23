@@ -1,45 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+
+import { ToastContext } from '../ToastProvider';
 import Button from '../Button';
-import Toast from '../Toast/Toast';
-import ToastShelf from '../ToastShelf/ToastShelf';
+import ToastShelf from '../ToastShelf';
+
 import styles from './ToastPlayground.module.css';
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
-	const [message, setMessage] = useState('');
-	const [variant, setVariant] = useState(VARIANT_OPTIONS[0]);
-	const [toasts, setToasts] = useState([
-		{
-			id: crypto.randomUUID(),
-			message: 'This is a notice toast',
-			variant: 'notice',
-		},
-		{
-			id: crypto.randomUUID(),
-			message: 'This is a warning toast',
-			variant: 'warning',
-		},
-	]);
+	const { createToast } = React.useContext(ToastContext);
+
+	const [message, setMessage] = React.useState('');
+	const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
 
 	function handleCreateToast(event) {
 		event.preventDefault();
-		const nextToasts = [
-			...toasts,
-			{
-				id: crypto.randomUUID(),
-				message,
-				variant,
-			},
-		];
-		setToasts(nextToasts);
+
+		createToast(message, variant);
+
 		setMessage('');
 		setVariant(VARIANT_OPTIONS[0]);
-	}
-
-	function handleDismiss(id) {
-		const nextToasts = toasts.filter(toast => toast.id !== id);
-		setToasts(nextToasts);
 	}
 
 	return (
@@ -49,9 +30,9 @@ function ToastPlayground() {
 				<h1>Toast Playground</h1>
 			</header>
 
-			<ToastShelf toasts={toasts} handleDismiss={handleDismiss} />
+			<ToastShelf />
 
-			<form onSubmit={handleCreateToast} className={styles.controlsWrapper}>
+			<form className={styles.controlsWrapper} onSubmit={handleCreateToast}>
 				<div className={styles.row}>
 					<label
 						htmlFor="message"
@@ -63,9 +44,11 @@ function ToastPlayground() {
 					<div className={styles.inputWrapper}>
 						<textarea
 							id="message"
-							value={message}
-							onChange={event => setMessage(event.target.value)}
 							className={styles.messageInput}
+							value={message}
+							onChange={event => {
+								setMessage(event.target.value);
+							}}
 						/>
 					</div>
 				</div>
@@ -73,19 +56,22 @@ function ToastPlayground() {
 				<div className={styles.row}>
 					<div className={styles.label}>Variant</div>
 					<div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-						{VARIANT_OPTIONS.map(variantOption => {
-							const id = `variant-${variantOption}`;
+						{VARIANT_OPTIONS.map(option => {
+							const id = `variant-${option}`;
+
 							return (
-								<label htmlFor={id} key={variantOption}>
+								<label key={id} htmlFor={id}>
 									<input
 										id={id}
 										type="radio"
 										name="variant"
-										value={variantOption}
-										checked={variant === variantOption}
-										onChange={e => setVariant(e.target.value)}
+										value={option}
+										checked={option === variant}
+										onChange={event => {
+											setVariant(event.target.value);
+										}}
 									/>
-									{variantOption}
+									{option}
 								</label>
 							);
 						})}
