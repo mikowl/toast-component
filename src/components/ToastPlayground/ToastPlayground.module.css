@@ -108,7 +108,8 @@
 .messageInput {
   display: block;
   width: 100%;
-  height: 4rem;
+  padding: 5px;
+  border-radius: 3px;
 }
 
 .secondsInput {
